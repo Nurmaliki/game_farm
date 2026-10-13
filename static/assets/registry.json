@@ -20,5 +20,16 @@
     "license": "Original AI-assisted project asset",
     "source": "OpenAI built-in image generation; prompt documented in Phase 9 report",
     "status": "production-candidate"
+  },
+  {
+    "id": "nusantara-farm-morning",
+    "path": "assets/environment/nusantara-farm-morning.png",
+    "type": "environment-backdrop",
+    "dimensions": "1672x941",
+    "frames": 1,
+    "animation": "layered Phaser wind, motes, irrigation glints, rain, and lighting",
+    "license": "Original AI-assisted project asset",
+    "source": "OpenAI built-in image generation",
+    "status": "production"
   }
 ]

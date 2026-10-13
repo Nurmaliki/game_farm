@@ -4,7 +4,7 @@ test('production build starts online and from the offline cache', async ({ conte
   await page.goto('/');
   await expect(page.getByRole('heading', { name: /NUSANTARA FARM/i })).toBeVisible();
   await page.getByRole('button', { name: 'Mulai Petualangan' }).click();
-  await expect(page.getByText('PANDUAN HARI INI')).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByText('MISI HARI INI')).toBeVisible({ timeout: 20_000 });
   await expect(page.locator('.game-shell canvas')).toBeVisible({ timeout: 20_000 });
 
   await page.evaluate(async () => {

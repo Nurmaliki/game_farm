@@ -1,11 +1,12 @@
-const VERSION = 'nusantara-farm-v2';
+const VERSION = 'nusantara-farm-v3';
 const SHELL = [
   '/',
   '/play',
   '/settings',
   '/manifest.webmanifest',
   '/assets/icons/nusantara-farm.svg',
-  '/assets/pixel-art/nusantara-atlas-v1.png'
+  '/assets/pixel-art/nusantara-atlas-v1.png',
+  '/assets/environment/nusantara-farm-morning.png'
 ];
 
 self.addEventListener('install', (event) =>

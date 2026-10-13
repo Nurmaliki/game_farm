@@ -36,6 +36,6 @@
 <div class="game-shell" bind:this={host} aria-label="Area permainan kebun"></div>
 
 <style>
-  .game-shell { width: 100%; aspect-ratio: 640 / 430; background: #77a85b; border: 4px solid #d6b96a; border-radius: 8px; overflow: hidden; image-rendering: pixelated; box-shadow: 0 12px 40px #071d1855; }
+  .game-shell { width: 100%; aspect-ratio: 16 / 9; background: #173d2d; border: 3px solid #e5bd62; border-radius: 18px; overflow: hidden; box-shadow: 0 22px 70px #020d0966,0 0 0 6px #173b2c,0 0 0 7px #f0cf7655; }
   :global(.game-shell canvas) { width: 100% !important; height: 100% !important; display: block; }
 </style>
