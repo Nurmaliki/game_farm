@@ -6,6 +6,7 @@
 - Repository telah terhubung ke project Vercel.
 - Build command: `npm run build`.
 - Output directory: `build`.
+- `vercel.json` menetapkan `outputDirectory` ke `build`; jangan gunakan default `public`.
 - Tidak ada environment variable atau secret yang dibutuhkan oleh client.
 
 ## Verifikasi sebelum deployment
