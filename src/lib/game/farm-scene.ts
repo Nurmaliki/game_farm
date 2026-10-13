@@ -141,11 +141,11 @@ class FarmScene extends Phaser.Scene {
   cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   keys!: Record<string, Phaser.Input.Keyboard.Key>;
   animationTime = 0;
-  private lastWorldFrame = 0;
+  private lastAtmosphereFrame = 0;
   private activePlot = -1;
   private hoverTool: Tool | null = null;
   private actionLocked = false;
-  private cropSprites: Phaser.GameObjects.Image[] = [];
+  private cropSprites: Array<Phaser.GameObjects.Image | undefined> = [];
   private motes: Array<{ x: number; y: number; speed: number; phase: number }> = [];
   private reducedEffects = false;
 
@@ -163,7 +163,7 @@ class FarmScene extends Phaser.Scene {
     this.callbacks.onScene(this);
     this.add.image(WORLD_W / 2, WORLD_H / 2, 'farm-morning').setDisplaySize(WORLD_W, WORLD_H).setDepth(0);
     this.worldGraphics = this.add.graphics().setDepth(2);
-    this.cropSprites = state.plots.map(() => this.add.image(0, 0, 'crop-growth').setVisible(false).setDepth(3));
+    this.cropSprites = Array.from({ length: state.plots.length });
     this.hoverGraphics = this.add.graphics().setDepth(6);
     this.atmosphereGraphics = this.add.graphics().setDepth(8);
     this.motes = Array.from({ length: this.reducedEffects ? 8 : 24 }, (_, index) => ({
@@ -187,15 +187,18 @@ class FarmScene extends Phaser.Scene {
   }
 
   syncCrops(state: GameState) {
-    if (!this.cropSprites.length) return;
     state.plots.forEach((tile, index) => {
-      const sprite = this.cropSprites[index];
-      if (!tile.cropId) { sprite.setVisible(false); return; }
+      let sprite = this.cropSprites[index];
+      if (!tile.cropId) { sprite?.setVisible(false); return; }
+      if (!sprite) {
+        sprite = this.add.image(0, 0, 'crop-growth').setDepth(3);
+        this.cropSprites[index] = sprite;
+      }
       const row = Math.max(0, CROP_ROWS.indexOf(tile.cropId));
       const crop = CROPS[tile.cropId];
       const stage = Math.min(3, Math.floor((tile.wateredDays / Math.max(1, crop.growthDays)) * 4));
       const { x, y } = tilePosition(tile);
-      sprite.setCrop(stage * 256, row * (1535 / 8), 256, 1535 / 8)
+      sprite.setCrop(stage * 128, row * 96, 128, 96)
         .setDisplaySize(48 + stage * 2, 54 + stage * 4)
         .setPosition(x + 19, y + 15)
         .setOrigin(0.5, 0.72)
@@ -336,14 +339,16 @@ class FarmScene extends Phaser.Scene {
     }
     this.playerShadow.setPosition(this.player.x, this.player.y + 25);
     if (this.activePlot >= 0 && this.hoverTool !== this.callbacks.getTool()) this.updateHover(this.input.activePointer);
-    this.drawAtmosphere(state);
-    if (time - this.lastWorldFrame > 90) { drawWorld(this, state); this.lastWorldFrame = time; }
+    if (time - this.lastAtmosphereFrame > 80) {
+      this.drawAtmosphere(state);
+      this.lastAtmosphereFrame = time;
+    }
   }
 }
 
 export function createFarmGame(parent: HTMLDivElement, callbacks: FarmSceneCallbacks) {
   return new Phaser.Game({
-    type: Phaser.CANVAS,
+    type: Phaser.AUTO,
     parent,
     width: WORLD_W,
     height: WORLD_H,

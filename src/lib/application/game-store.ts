@@ -28,7 +28,7 @@ function commit(result: ActionResult): ActionResult {
 export const gameCommands = {
   replace(state: GameState) { current = structuredClone(state); gameState.set(current); },
   snapshot() { return structuredClone(current); },
-  move(x: number, y: number) { current.player.x = x; current.player.y = y; gameState.set(current); },
+  move(x: number, y: number) { current.player.x = x; current.player.y = y; },
   toolAt(index: number, tool: Tool) { return commit(useTool(current, current.plots[index], tool, crop)); },
   sleep() { const result = nextDay(current); generateForage(current); processAdvancedDay(current); resetVillageDay(current); resetPersonalizationDay(current); return commit(result); },
   buy(item: string, amount = 1) { return commit(buyItem(current, item, amount)); },
