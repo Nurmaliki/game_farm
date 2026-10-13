@@ -26,6 +26,7 @@ describe('phase 10 production hardening', () => {
     const headers = Object.fromEntries(
       deployment.headers.flatMap((rule) => rule.headers).map(({ key, value }) => [key, value])
     );
+    expect(headers['Content-Security-Policy']).toContain("script-src 'self' 'unsafe-inline'");
     expect(headers['Content-Security-Policy']).toContain("object-src 'none'");
     expect(headers['X-Content-Type-Options']).toBe('nosniff');
     expect(headers['Permissions-Policy']).toContain('camera=()');
