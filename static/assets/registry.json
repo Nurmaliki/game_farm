@@ -23,11 +23,33 @@
   },
   {
     "id": "nusantara-farm-morning",
-    "path": "assets/environment/nusantara-farm-morning.png",
+    "path": "assets/environment/nusantara-farm-morning.webp",
     "type": "environment-backdrop",
     "dimensions": "1672x941",
     "frames": 1,
     "animation": "layered Phaser wind, motes, irrigation glints, rain, and lighting",
+    "license": "Original AI-assisted project asset",
+    "source": "OpenAI built-in image generation",
+    "status": "production"
+  },
+  {
+    "id": "crop-growth-atlas",
+    "path": "assets/gameplay/crop-growth-atlas.webp",
+    "type": "sprite-atlas",
+    "dimensions": "1024x1535",
+    "frames": 32,
+    "animation": "four growth stages for eight crops",
+    "license": "Original AI-assisted project asset",
+    "source": "OpenAI built-in image generation",
+    "status": "production"
+  },
+  {
+    "id": "farming-tool-icons",
+    "path": "assets/gameplay/tool-icons.webp",
+    "type": "ui-icon-strip",
+    "dimensions": "2172x724",
+    "frames": 6,
+    "animation": null,
     "license": "Original AI-assisted project asset",
     "source": "OpenAI built-in image generation",
     "status": "production"
