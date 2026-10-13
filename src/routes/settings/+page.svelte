@@ -1,0 +1,4 @@
+<script lang="ts">import AudioControl from '$lib/ui/AudioControl.svelte';</script>
+<svelte:head><title>Pengaturan · Nusantara Farm</title></svelte:head>
+<main><a href="/">← Kembali</a><h1>Pengaturan</h1><section><h2>Audio</h2><p>Audio aktif setelah interaksi pengguna agar sesuai pembatasan autoplay browser.</p><AudioControl/></section><section><h2>Grafis</h2><label><input type="checkbox" checked> Efek cuaca</label><label><input type="checkbox" checked> Lighting dinamis</label><p>Pixel art memakai nearest-neighbor filtering dan integer-friendly scaling.</p></section></main>
+<style>main{max-width:720px;margin:7vh auto;padding:2rem;color:#eee;background:#173b32;font-family:system-ui}a{color:#e7c55c}section{padding:1rem;margin:1rem 0;background:#102d27}label{display:block;margin:.7rem 0}</style>

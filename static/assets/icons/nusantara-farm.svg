@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Nusantara Farm</title>
+  <rect width="512" height="512" rx="96" fill="#173f35"/>
+  <circle cx="390" cy="118" r="54" fill="#e7c75d"/>
+  <path fill="#91bd62" d="M0 314 128 218l91 70 84-99 209 152v171H0z"/>
+  <path fill="#477f50" d="M0 370 153 276l103 74 97-71 159 96v137H0z"/>
+  <path fill="#e9dfb9" d="M151 226h211v196H151z"/>
+  <path fill="#a6533c" d="m119 245 138-113 138 113-34 42-104-85-104 85z"/>
+  <path fill="#765031" d="M225 321h64v101h-64z"/>
+  <path fill="#f4ecd0" d="M173 281h48v48h-48zm118 0h48v48h-48z"/>
+  <path fill="#d8b455" d="M52 421h408v35H52z"/>
+</svg>

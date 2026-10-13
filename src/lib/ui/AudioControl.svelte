@@ -1,0 +1,3 @@
+<script lang="ts">import{onMount}from'svelte';import{savedVolume,setVolume,startAmbience,stopAmbience}from'$lib/game/audio';let volume=.2;let playing=false;onMount(()=>{volume=savedVolume()});function toggle(){playing=!playing;if(playing)startAmbience(volume);else stopAmbience();}function change(){setVolume(volume);}</script>
+<div class="audio"><button on:click={toggle}>{playing?'Audio On':'Aktifkan Audio'}</button><input aria-label="Volume audio" type="range" min="0" max="1" step="0.05" bind:value={volume} on:input={change}></div>
+<style>.audio{display:flex;align-items:center;gap:6px}.audio button{padding:6px;background:#284c3e;color:#eee;border:1px solid #8f7b49;font-size:.62rem}.audio input{width:70px}@media(max-width:650px){.audio input{display:none}}</style>

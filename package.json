@@ -1,0 +1,44 @@
+{
+  "name": "nusantara-farm",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:e2e:production": "playwright test --config playwright.production.config.ts",
+    "validate:assets": "node scripts/validate-assets.mjs",
+    "release:audit": "yarn audit --groups dependencies",
+    "performance:check": "node scripts/check-performance.mjs",
+    "deployment:verify": "node scripts/verify-deployment.mjs",
+    "release:check": "node scripts/release-check.mjs",
+    "release:verify": "npm run check && npm run lint && npm run test && npm run validate:assets && npm run build && npm run release:check && npm run performance:check && npm run test:e2e && npm run test:e2e:production"
+  },
+  "dependencies": {
+    "@sveltejs/adapter-static": "3.0.10",
+    "@sveltejs/kit": "2.70.3",
+    "dexie": "4.0.4",
+    "phaser": "3.80.1",
+    "svelte": "5.57.2",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0",
+    "@sveltejs/vite-plugin-svelte": "5.1.1",
+    "@typescript-eslint/eslint-plugin": "7.8.0",
+    "@typescript-eslint/parser": "7.8.0",
+    "eslint": "8.57.0",
+    "eslint-plugin-svelte": "2.38.0",
+    "svelte-check": "4.7.6",
+    "tslib": "2.6.2",
+    "typescript": "5.4.5",
+    "vite": "6.4.4",
+    "vitest": "1.6.0"
+  },
+  "packageManager": "yarn@1.22.22"
+}

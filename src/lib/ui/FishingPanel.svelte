@@ -1,0 +1,20 @@
+<script lang="ts">
+  import { gameCommands, gameState } from '$lib/application/game-store';
+  import { FISH, RODS, type FishingLocation } from '$lib/content/fish';
+  export let close:()=>void;
+  let location:FishingLocation='river';
+  const locationNames:Record<FishingLocation,string>={river:'Sungai',lake:'Danau',forest_pond:'Kolam Hutan',beach:'Pantai',farm_pond:'Kolam Kebun'};
+  $: session=$gameState.fishing.session;
+  $: activeFish=session.fishId?FISH[session.fishId]:null;
+  function next(){ if(['CAUGHT','ESCAPED'].includes(session.phase)) gameCommands.resetFishing(); else if(session.phase==='IDLE') gameCommands.startFishing(location); else gameCommands.advanceFishing(); }
+</script>
+<div class="modal" role="dialog" aria-modal="true"><section class="panel"><button class="close" on:click={close}>×</button><small>MEMANCING</small><h2>{locationNames[location]}</h2>
+  <div class="controls"><select bind:value={location} disabled={session.phase!=='IDLE'}>{#each Object.entries(locationNames) as [id,name]}<option value={id}>{name}</option>{/each}</select><span>{RODS[$gameState.fishing.rod].name} · Umpan {$gameState.fishing.bait}</span></div>
+  <div class="water">
+    {#if session.phase==='MINIGAME'}<div class="track"><i class="fish" style={`left:${session.fishPosition}%`}></i><i class="zone" style={`left:${session.zonePosition}%`}></i></div><div class="bar"><i style={`width:${session.progress}%`}></i></div><div class="bar tension"><i style={`width:${session.tension}%`}></i></div><p>{activeFish?.name} · progress {Math.round(session.progress)}% · tension {Math.round(session.tension)}%</p><div class="reel"><button on:click={()=>gameCommands.moveFishing(-1)}>← Tarik Kiri</button><button on:click={()=>gameCommands.fishingTick()}>Tahan</button><button on:click={()=>gameCommands.moveFishing(1)}>Tarik Kanan →</button></div>{:else}<strong>{session.phase}</strong><p>{activeFish?`${activeFish.name} menggigit kail!`:'Pilih lokasi dan ikuti tahapan lemparan.'}</p>{/if}
+  </div><button class="primary" on:click={next}>{session.phase==='IDLE'?'Mulai':session.phase==='MINIGAME'?'Minigame aktif':session.phase==='CAUGHT'||session.phase==='ESCAPED'?'Selesai':'Lanjutkan'}</button>
+  <h3>ENSIKLOPEDIA IKAN</h3><div class="encyclopedia">{#each Object.values(FISH) as fish}<div class:known={$gameState.fishRecords[fish.id]}><b>{$gameState.fishRecords[fish.id]?fish.name:'???'}</b><span>{fish.rarity} · {$gameState.fishRecords[fish.id]?.caught??0} ekor</span></div>{/each}</div>
+</section></div>
+<style>
+  .modal{position:fixed;z-index:20;inset:0;background:#071a16dd;display:grid;place-items:center;padding:16px}.panel{position:relative;width:min(760px,100%);max-height:92vh;overflow:auto;padding:26px;background:#e9dfba;color:#203c35;border:8px double #6e5037}.close{position:absolute;right:10px;top:8px;border:0;background:none;font-size:1.6rem}.panel h2{font:900 2rem Georgia;margin:.2rem 0}.controls{display:flex;justify-content:space-between;gap:12px;margin:12px 0}.controls select{padding:8px}.water{min-height:180px;background:linear-gradient(#69b2ae,#246f79);border:4px solid #4b3829;padding:20px;text-align:center;color:white}.track{position:relative;height:64px;background:#174f62;margin:12px}.track i{position:absolute;top:12px;transform:translateX(-50%)}.fish{width:15px;height:30px;background:#f0bd4d;border-radius:50%}.zone{width:40px;height:42px;border:4px solid #b8f3c4;background:#80d49b44}.bar{height:12px;background:#163b35;margin:8px}.bar i{display:block;height:100%;background:#e9cb57}.bar.tension i{background:#df674f}.reel{display:flex;justify-content:center;gap:8px}.reel button,.primary{padding:10px;background:#315d4b;color:white;border:2px solid #b79754}.primary{width:100%;margin-top:10px}.primary:disabled{opacity:.5}.encyclopedia{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.encyclopedia div{padding:9px;background:#c8c1a7;color:#747064}.encyclopedia div.known{background:#fff7d9;color:#29453b}.encyclopedia span{display:block;font-size:.65rem;margin-top:3px}@media(max-width:600px){.encyclopedia{grid-template-columns:repeat(2,1fr)}.controls{flex-direction:column}.reel button{font-size:.7rem}}
+</style>
