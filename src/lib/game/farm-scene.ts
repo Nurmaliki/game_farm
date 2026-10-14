@@ -74,19 +74,9 @@ export function drawWorld(target: Phaser.Scene, state: GameState) {
   const graphics = scene.worldGraphics;
   graphics.clear();
 
-  // Four compact raised beds create paths and hierarchy instead of a button matrix.
-  for (let bedY = 0; bedY < 2; bedY += 1) {
-    for (let bedX = 0; bedX < 2; bedX += 1) {
-      const x = FARM_X - 10 + bedX * (TILE * 4 + BED_GAP);
-      const y = FARM_Y - 10 + bedY * (TILE * 3 + BED_GAP);
-      graphics.fillStyle(0x142f22, 0.22).fillRoundedRect(x + 4, y + 7, TILE * 4 + 12, TILE * 3 + 12, 14);
-      graphics.fillStyle(0x6f9d4d, 0.74).fillRoundedRect(x, y, TILE * 4 + 12, TILE * 3 + 12, 14);
-      graphics.lineStyle(3, 0xd0a866, 0.68).strokeRoundedRect(x, y, TILE * 4 + 12, TILE * 3 + 12, 14);
-      graphics.lineStyle(1, 0xffe2a0, 0.28).strokeRoundedRect(x + 4, y + 4, TILE * 4 + 4, TILE * 3 + 4, 10);
-    }
-  }
-
-  state.plots.forEach((tile, index) => {
+  // The painted isometric beds stay fully visible. Only changed plots receive
+  // a state layer, while untouched plots remain part of the environment.
+  state.plots.forEach((tile) => {
     const { x, y } = tilePosition(tile);
     if (tile.tilled) {
       const soil = tile.watered ? 0x40342e : 0x70482e;
@@ -97,13 +87,6 @@ export function drawWorld(target: Phaser.Scene, state: GameState) {
       if (tile.watered) {
         graphics.fillStyle(0x98e8f6, 0.32).fillEllipse(x + 19, y + 32, 24, 3);
         graphics.fillStyle(0xd5f8ff, 0.52).fillCircle(x + 29, y + 9, 1.5);
-      }
-    } else {
-      // Sparse grass marks the cell subtly without drawing a permanent box.
-      graphics.lineStyle(1.5, 0x285c35, 0.6);
-      for (let blade = 0; blade < 3; blade += 1) {
-        const bx = x + 9 + blade * 10;
-        graphics.lineBetween(bx, y + 31, bx - 2, y + 26 - (index + blade) % 4);
       }
     }
   });
