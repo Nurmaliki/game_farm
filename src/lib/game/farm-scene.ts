@@ -152,7 +152,7 @@ class FarmScene extends Phaser.Scene {
   constructor(private callbacks: FarmSceneCallbacks) { super('farm'); }
 
   preload() {
-    this.load.image('farm-morning', '/assets/environment/nusantara-farm-morning.webp');
+    this.load.image('farm-morning', '/assets/environment/nusantara-farm-isometric.webp');
     this.load.image('crop-growth', '/assets/gameplay/crop-growth-atlas.webp');
     this.load.image('nusantara-atlas', '/assets/pixel-art/nusantara-atlas-v1.png');
   }
@@ -348,7 +348,7 @@ class FarmScene extends Phaser.Scene {
 
 export function createFarmGame(parent: HTMLDivElement, callbacks: FarmSceneCallbacks) {
   return new Phaser.Game({
-    type: Phaser.AUTO,
+    type: Phaser.CANVAS,
     parent,
     width: WORLD_W,
     height: WORLD_H,

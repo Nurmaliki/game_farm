@@ -22,12 +22,12 @@
     "status": "production-candidate"
   },
   {
-    "id": "nusantara-farm-morning",
-    "path": "assets/environment/nusantara-farm-morning.webp",
+    "id": "nusantara-farm-isometric",
+    "path": "assets/environment/nusantara-farm-isometric.webp",
     "type": "environment-backdrop",
     "dimensions": "960x540",
     "frames": 1,
-    "animation": "layered Phaser wind, motes, irrigation glints, rain, and lighting",
+    "animation": "layered Phaser wind, water, birds, rain, night lighting, and fireflies",
     "license": "Original AI-assisted project asset",
     "source": "OpenAI built-in image generation",
     "status": "production"

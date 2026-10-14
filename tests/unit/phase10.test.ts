@@ -17,7 +17,7 @@ describe('phase 10 production hardening', () => {
   });
 
   it('uses a versioned offline cache with navigation fallback', () => {
-    expect(worker).toContain("const VERSION = 'nusantara-farm-v4'");
+    expect(worker).toContain("const VERSION = 'nusantara-farm-v5'");
     expect(worker).toContain("caches.match('/')");
     expect(worker).toContain('self.clients.claim()');
   });

@@ -1,4 +1,4 @@
-const VERSION = 'nusantara-farm-v4';
+const VERSION = 'nusantara-farm-v5';
 const SHELL = [
   '/',
   '/play',
@@ -6,7 +6,7 @@ const SHELL = [
   '/manifest.webmanifest',
   '/assets/icons/nusantara-farm.svg',
   '/assets/pixel-art/nusantara-atlas-v1.png',
-  '/assets/environment/nusantara-farm-morning.webp',
+  '/assets/environment/nusantara-farm-isometric.webp',
   '/assets/gameplay/crop-growth-atlas.webp',
   '/assets/gameplay/tool-icons.webp'
 ];

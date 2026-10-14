@@ -25,6 +25,7 @@
   let showExploration = false;
   let showAdvanced = false;
   let showVillage = false;
+  let villageTab: 'npc' | 'quest' | 'museum' | 'calendar' = 'npc';
   let showPersonalization = false;
   let statusOpen = true;
   let guideOpen = true;
@@ -83,6 +84,7 @@
         <li class:done={$gameState.tutorialStep >= 3}>Siram setiap hari</li><li class:done={$gameState.tutorialStep >= 4}>Panen padi</li>
       </ol>
       <p class="hint">Klik petak dengan alat aktif. Setiap tanaman mengikuti musim, durasi tumbuh, regrowth, dan kualitasnya.</p>
+      <button class="order-button" on:click={() => { villageTab = 'quest'; showVillage = true; }}>📋 Papan Pesanan</button>
       <button on:click={() => showShop = !showShop}>Kios Pak Jaya</button>
       <button on:click={() => showBarn = !showBarn}>Kelola Peternakan ({$gameState.animals.length})</button>
       <button on:click={() => showFishing = true}>Pergi Memancing</button>
@@ -90,7 +92,7 @@
       <button on:click={() => showProduction = true}>Bangun & Produksi</button>
       <button on:click={() => showExploration = true}>Peta & Eksplorasi</button>
       <button on:click={() => showAdvanced = true}>Kebun Lanjutan</button>
-      <button on:click={() => showVillage = true}>Desa & Kalender</button>
+      <button on:click={() => { villageTab = 'npc'; showVillage = true; }}>Desa & Kalender</button>
       <button on:click={() => showPersonalization = true}>Koleksi & Rumah</button>
       <button on:click={() => gameCommands.sleep()}>Tidur → Hari Baru</button>
       <div class="save"><button on:click={save}>{saving ? 'Menyimpan…' : 'Simpan'}</button><button on:click={load}>Muat</button></div><div class="save"><button on:click={downloadBackup}>Ekspor</button><button on:click={recover}>Pulihkan</button></div><label class="import">Impor Save<input type="file" accept="application/json" on:change={importFile}></label>
@@ -110,7 +112,7 @@
   {#if showProduction}<ProductionPanel close={()=>showProduction=false}/>{/if}
   {#if showExploration}<ExplorationPanel close={()=>showExploration=false}/>{/if}
   {#if showAdvanced}<AdvancedFarmPanel close={()=>showAdvanced=false}/>{/if}
-  {#if showVillage}<VillagePanel close={()=>showVillage=false}/>{/if}
+  {#if showVillage}<VillagePanel initialTab={villageTab} close={()=>showVillage=false}/>{/if}
   {#if showPersonalization}<PersonalizationPanel close={()=>showPersonalization=false}/>{/if}
 </main>
 
